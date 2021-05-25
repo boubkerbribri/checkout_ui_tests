@@ -38,11 +38,17 @@ class PS_CHECKOUT_LOGIN extends CheckoutAuthenticationPage.constructor {
    * Login to Ps checkout account
    * @param page {Page} Browser tab
    * @param psCheckoutAccount {Object} Data to login
-   * @returns {Promise<void>}
+   * @returns {Promise<boolean>}
    */
   async loginToPsx(page, psCheckoutAccount) {
+    // Fill form
     await this.fillPsxLoginForm(page, psCheckoutAccount);
+
+    // Validate form
     await page.click(this.loginFormSubmitButton);
+
+    // Check next step is displayed
+    return this.isAdditionalFormVisible(page);
   }
 }
 
