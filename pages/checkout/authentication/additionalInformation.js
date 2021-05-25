@@ -1,5 +1,5 @@
 // Import checkout authentication page
-const CheckoutAuthenticationPage = require('index.js');
+const CheckoutAuthenticationPage = require('@pages/checkout/authentication/index.js');
 
 class PS_CHECKOUT_ADDITIONAL_INFORMATION extends CheckoutAuthenticationPage.constructor {
   constructor() {
