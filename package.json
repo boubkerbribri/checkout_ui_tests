@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
     "lint-fix": "eslint --fix --ignore-path .gitignore .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha --recursive --file ./node_modules/prestashop_test_lib/kernel/utils/setup.js scenarios/*"
   },
   "_moduleAliases": {
     "@pages": "pages",
