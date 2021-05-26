@@ -15,13 +15,6 @@ const dashboardPage = versionSelectResolver.require('BO/dashboard/index.js');
 const moduleManagerPage = versionSelectResolver.require('BO/modules/moduleManager/index.js');
 const psCheckoutPage = versionSelectResolver.require('BO/checkout/index.js');
 const psCheckoutAuthHomePage = versionSelectResolver.require('BO/checkout/authentication/index.js');
-const psCheckoutAuthLoginPage = versionSelectResolver.require('BO/checkout/authentication/login.js');
-const psCheckoutAuthAdditionalInfoPage = versionSelectResolver.require(
-  'BO/checkout/authentication/additionalInformation.js',
-);
-
-// Import data
-const {psxAccount} = require('@data/account.js');
 
 // Browser vars
 let browserContext;
@@ -33,7 +26,7 @@ const moduleInformation = {
 };
 
 
-describe('Login to PSx account on BO', async () => {
+describe('Log out from psx account', async () => {
   // before and after functions
   before(async function () {
     browserContext = await browserHelper.createBrowserContext(this.browser);
@@ -71,21 +64,6 @@ describe('Login to PSx account on BO', async () => {
     await expect(pageTitle).to.contain(moduleManagerPage.pageTitle);
   });
 
-  it('should check that the module was installed', async () => {
-    const isModuleVisible = await moduleManagerPage.searchModule(
-      page,
-      moduleInformation.tag,
-      moduleInformation.name,
-    );
-
-    await expect(isModuleVisible).to.be.true;
-  });
-
-  it('should check that the module is enabled', async () => {
-    const isModuleEnabled = await moduleManagerPage.isModuleEnabled(page, moduleInformation.name);
-    await expect(isModuleEnabled).to.be.true;
-  });
-
   it('should go to configuration page', async () => {
     await moduleManagerPage.goToConfigurationPage(page, moduleInformation.name);
 
@@ -94,18 +72,8 @@ describe('Login to PSx account on BO', async () => {
     await expect(pageSubtitle).to.contain(moduleInformation.name);
   });
 
-  it('should go to login form', async () => {
-    const loginFormDisplayed = await psCheckoutAuthHomePage.goToPsxLoginForm(page);
-    await expect(loginFormDisplayed).to.be.true;
-  });
-
-  it('should login and pass to additional information form', async () => {
-    const additionalInformationFormDisplayed = await psCheckoutAuthLoginPage.loginToPsx(page, psxAccount);
-    await expect(additionalInformationFormDisplayed).to.be.true;
-  });
-
-  it('should add additional information and validate login', async () => {
-    const userLoggedIn = await psCheckoutAuthAdditionalInfoPage.fillAndSubmitAdditionalInformation(page, psxAccount);
-    await expect(userLoggedIn).to.be.true;
+  it('should log out from psx account', async () => {
+    const userLoggedIn = await psCheckoutAuthHomePage.logoutPsxAccount(page);
+    await expect(userLoggedIn).to.be.false;
   });
 });

@@ -21,7 +21,7 @@ class PS_CHECKOUT_ADDITIONAL_INFORMATION extends CheckoutAuthenticationPage.cons
     this.cityInput = '#town';
     this.countrySelect = '#country';
     this.countryPhoneCodeSelect = '#phone-country';
-    this.businessPhoneInput = '#__BVID__41';
+    this.businessPhoneInput = '#business-phone-number';
 
     // Business information
     this.websiteInput = '#website';
@@ -45,7 +45,6 @@ class PS_CHECKOUT_ADDITIONAL_INFORMATION extends CheckoutAuthenticationPage.cons
     await this.setValue(page, this.firstnameInput, accountPersonalInformation.firstname);
     await this.setValue(page, this.lastnameInput, accountPersonalInformation.lastname);
     await this.selectByVisibleText(page, this.languageSelect, accountPersonalInformation.language);
-    await this.selectByVisibleText(page, this.qualificationSelect, accountPersonalInformation.qualification);
     await this.selectByVisibleText(page, this.qualificationSelect, accountPersonalInformation.qualification);
   }
 
@@ -81,7 +80,7 @@ class PS_CHECKOUT_ADDITIONAL_INFORMATION extends CheckoutAuthenticationPage.cons
   /**
    * Fill all form
    * @param page {Page} Browser tab
-   * @param accountInformation {personalInformation, billingAddress, businessInformation} Information to fill the form
+   * @param accountInformation {Object} Information to fill the form
    * @returns {Promise<void>}
    */
   async fillAdditionalInformationForm(page, accountInformation) {
@@ -105,10 +104,10 @@ class PS_CHECKOUT_ADDITIONAL_INFORMATION extends CheckoutAuthenticationPage.cons
   /**
    * Add additional information and login
    * @param page {Page} Browser tab
-   * @param accountInformation {personalInformation, billingAddress, businessInformation} Information to fill the form
+   * @param accountInformation {Object} Information to fill the form
    * @returns {Promise<boolean>}
    */
-  async fillAndSubmitAdditionalInformationForm(page, accountInformation) {
+  async fillAndSubmitAdditionalInformation(page, accountInformation) {
     // Fill all form
     await this.fillAdditionalInformationForm(page, accountInformation);
 
