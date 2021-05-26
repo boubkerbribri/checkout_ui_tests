@@ -21,6 +21,11 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
     this.loginFormCard = '#login-form-card';
     this.signupFormCard = '#signup-form-card';
     this.additionalFormCard = '#additional-information-form-card';
+
+    // Paypal block selectors
+    this.linkToPaypalAccountButton = '#link-to-paypal-account-button';
+    this.unlinkPaypalAccountButton = '#paypal-unlink-button';
+    this.paypalPopupEmailInput = '#email';
   }
 
   // Functions
@@ -32,7 +37,7 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
    * @param timeout {number} Time to wait for the form to be visible
    * @returns {Promise<boolean>}
    */
-  isLoginFormVisible(page, timeout = 10000) {
+  loginFormVisible(page, timeout = 10000) {
     return this.elementVisible(page, this.loginFormCard, timeout);
   }
 
@@ -42,7 +47,7 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
    * @param timeout {number} Time to wait for the form to be visible
    * @returns {Promise<boolean>}
    */
-  isSignupFormVisible(page, timeout = 10000) {
+  signupFormVisible(page, timeout = 10000) {
     return this.elementVisible(page, this.signupFormCard, timeout);
   }
 
@@ -52,7 +57,7 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
    * @param timeout {number} Time to wait for the form to be visible
    * @returns {Promise<boolean>}
    */
-  isAdditionalFormVisible(page, timeout = 10000) {
+  additionalFormVisible(page, timeout = 10000) {
     return this.elementVisible(page, this.additionalFormCard, timeout);
   }
 
@@ -64,8 +69,20 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
    * @param timeout {number} Maximum time to wait for element to be visible
    * @returns {Promise<boolean>}
    */
-  isPsxLoggedIn(page, timeout = 10000) {
+  psxLoggedIn(page, timeout = 10000) {
     return this.elementVisible(page, this.logourFromPsCheckoutLink, timeout);
+  }
+
+  /**
+   * Check if paypal account is logged in
+   * @param page {Page} Browser tab
+   * @param timeout {number} Maximum time to wait for element to be visible
+   * @returns {Promise<boolean>}
+   */
+  async paypalLoggedIn(page, timeout = 30000) {
+    await page.waitForNavigation('networkidle', {timeout});
+
+    return this.elementVisible(page, this.unlinkPaypalAccountButton, timeout);
   }
 
   // Go to Forms functions
@@ -77,7 +94,7 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
    */
   async goToPsxLoginForm(page) {
     await page.click(this.loginToPSCheckoutLink);
-    return this.isLoginFormVisible(page);
+    return this.loginFormVisible(page);
   }
 
   /**
@@ -97,7 +114,16 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
     ]);
 
     // Return user status
-    return this.isLoginFormVisible(page);
+    return this.loginFormVisible(page);
+  }
+
+  /**
+   * Open paypal popup to login
+   * @param page {Page} Browser tab
+   * @returns {Promise<Page>} Popup opened from paypal
+   */
+  openPaypalLoginPopup(page) {
+    return this.openLinkWithTargetBlank(page, this.linkToPaypalAccountButton, this.paypalPopupEmailInput);
   }
 }
 

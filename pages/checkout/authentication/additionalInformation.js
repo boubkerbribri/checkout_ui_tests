@@ -115,7 +115,7 @@ class PS_CHECKOUT_ADDITIONAL_INFORMATION extends CheckoutAuthenticationPage.cons
     await page.click(this.submitSignupFormButton);
 
     // Check that user is logged in
-    return this.isPsxLoggedIn(page);
+    return this.psxLoggedIn(page);
   }
 }
 

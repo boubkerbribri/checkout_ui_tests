@@ -30,4 +30,10 @@ const psxAccount = {
   },
 };
 
-module.exports = {psxAccount};
+const paypalAccount = {
+  email: 'stephane.decisy+seller1@prestashop.com',
+  password: 'prestashop',
+  country: 'France',
+};
+
+module.exports = {psxAccount, paypalAccount};

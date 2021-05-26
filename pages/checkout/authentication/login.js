@@ -48,7 +48,7 @@ class PS_CHECKOUT_LOGIN extends CheckoutAuthenticationPage.constructor {
     await page.click(this.loginFormSubmitButton);
 
     // Check next step is displayed
-    return this.isAdditionalFormVisible(page);
+    return this.additionalFormVisible(page);
   }
 }
 

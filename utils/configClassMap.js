@@ -31,4 +31,12 @@ module.exports = [
       '1.7.8': '@pages/checkout/authentication/additionalInformation.js',
     },
   },
+  {
+    file: 'BO/checkout/paypal/popup.js',
+    versions: {
+      '1.7.6': '@pages/checkout/paypal/popup.js',
+      '1.7.7': '@pages/checkout/paypal/popup.js',
+      '1.7.8': '@pages/checkout/paypal/popup.js',
+    },
+  },
 ];
