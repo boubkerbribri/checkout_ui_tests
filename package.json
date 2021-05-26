@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
     "lint-fix": "eslint --fix --ignore-path .gitignore .",
-    "test": "./node_modules/mocha/bin/mocha --recursive --file ./node_modules/prestashop_test_lib/kernel/utils/setup.js scenarios/*"
+    "all-tests": "./node_modules/mocha/bin/mocha --recursive --file ./node_modules/prestashop_test_lib/kernel/utils/setup.js scenarios/*",
+    "specific-test": "./node_modules/mocha/bin/mocha --recursive --file ./node_modules/prestashop_test_lib/kernel/utils/setup.js scenarios/$TEST_PATH",
+    "specific-test-fast-fail": "./node_modules/mocha/bin/mocha --recursive --file ./node_modules/prestashop_test_lib/kernel/utils/setup.js scenarios/$TEST_PATH"
   },
   "_moduleAliases": {
     "@pages": "pages",
