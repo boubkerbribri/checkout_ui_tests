@@ -88,6 +88,16 @@ class PS_CHECKOUT_AUTHENTICATION extends CheckoutConfigurationPage.constructor {
   // Go to Forms functions
 
   /**
+   * Fo to signup form
+   * @param page
+   * @returns {Promise<boolean>}
+   */
+  async goToPsxSignUpForm(page) {
+    await page.click(this.signupToPSCheckoutLink);
+    return this.signupFormVisible(page);
+  }
+
+  /**
    * Go to login form
    * @param page {Page} Browser tab
    * @returns {Promise<boolean>}
