@@ -24,6 +24,14 @@ module.exports = [
     },
   },
   {
+    file: 'BO/checkout/authentication/signup.js',
+    versions: {
+      '1.7.6': '@pages/checkout/authentication/signup.js',
+      '1.7.7': '@pages/checkout/authentication/signup.js',
+      '1.7.8': '@pages/checkout/authentication/signup.js',
+    },
+  },
+  {
     file: 'BO/checkout/authentication/additionalInformation.js',
     versions: {
       '1.7.6': '@pages/checkout/authentication/additionalInformation.js',
