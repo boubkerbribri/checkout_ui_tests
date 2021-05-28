@@ -21,16 +21,14 @@ const psCheckoutAuthAdditionalInfoPage = versionSelectResolver.require(
 );
 
 // Import data
-const {psxAccount} = require('@data/account.js');
+const {psxAccount} = require('@data/demo/accounts.js');
 
 // Browser vars
 let browserContext;
 let page;
 
-const moduleInformation = {
-  name: 'PrestaShop Checkout',
-  tag: 'ps_checkout',
-};
+// Import module information
+const moduleInformation = require('@data/demo/moduleInformation.js');
 
 
 describe('Login to PSx account on BO', async () => {
@@ -69,21 +67,6 @@ describe('Login to PSx account on BO', async () => {
 
     const pageTitle = await moduleManagerPage.getPageTitle(page);
     await expect(pageTitle).to.contain(moduleManagerPage.pageTitle);
-  });
-
-  it('should check that the module was installed', async () => {
-    const isModuleVisible = await moduleManagerPage.searchModule(
-      page,
-      moduleInformation.tag,
-      moduleInformation.name,
-    );
-
-    await expect(isModuleVisible).to.be.true;
-  });
-
-  it('should check that the module is enabled', async () => {
-    const isModuleEnabled = await moduleManagerPage.isModuleEnabled(page, moduleInformation.name);
-    await expect(isModuleEnabled).to.be.true;
   });
 
   it('should go to configuration page', async () => {

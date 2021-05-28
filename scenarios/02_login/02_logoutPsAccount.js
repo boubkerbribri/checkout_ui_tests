@@ -20,10 +20,8 @@ const psCheckoutAuthHomePage = versionSelectResolver.require('BO/checkout/authen
 let browserContext;
 let page;
 
-const moduleInformation = {
-  name: 'PrestaShop Checkout',
-  tag: 'ps_checkout',
-};
+// Import module information
+const moduleInformation = require('@data/demo/moduleInformation.js');
 
 
 describe('Log out from psx account', async () => {
@@ -72,7 +70,7 @@ describe('Log out from psx account', async () => {
     await expect(pageSubtitle).to.contain(moduleInformation.name);
   });
 
-  it('should log out from psx account', async () => {
+  it('should logout from psx account', async () => {
     const userLoggedIn = await psCheckoutAuthHomePage.logoutPsxAccount(page);
     await expect(userLoggedIn).to.be.false;
   });

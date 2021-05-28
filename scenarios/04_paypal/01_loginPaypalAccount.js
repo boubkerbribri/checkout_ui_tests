@@ -24,12 +24,10 @@ let page;
 // Paypal popup page
 let paypalPage;
 
-const {paypalAccount} = require('@data/account.js');
+const {paypalAccount} = require('@data/demo/accounts.js');
 
-const moduleInformation = {
-  name: 'PrestaShop Checkout',
-  tag: 'ps_checkout',
-};
+// Import module information
+const moduleInformation = require('@data/demo/moduleInformation.js');
 
 
 describe('Login to Paypal account', async () => {
