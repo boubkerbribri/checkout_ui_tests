@@ -14,14 +14,6 @@ class PS_CHECKOUT_LOGIN extends CheckoutAuthenticationPage.constructor {
   }
 
   // Ps checkout account functions
-  /**
-   * check if login form is visible
-   * @param page {Page} Browser tab
-   * @returns {Promise<boolean>}
-   */
-  isPsxLoginFormVisible(page) {
-    return this.waitForVisibleSelector(page, this.loginFormEmailInput, 2000);
-  }
 
   /**
    * Fill psx login form
