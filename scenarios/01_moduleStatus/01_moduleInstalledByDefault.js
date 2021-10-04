@@ -3,6 +3,7 @@ require('module-alias/register');
 const {expect} = require('chai');
 const browserHelper = require('prestashop_test_lib/kernel/utils/helpers.js');
 const configClassMap = require('@utils/configClassMap.js');
+const dbHelper = require('../../dbHelper/dbHelper');
 
 // Get resolver
 const VersionSelectResolver = require('prestashop_test_lib/kernel/resolvers/versionSelectResolver.js');
@@ -32,6 +33,9 @@ describe('Check that the module is installed by default', async () => {
 
   after(async () => {
     await browserHelper.closeBrowserContext(browserContext);
+
+    // Destroy mysql connection
+    await dbHelper.destroyConnection();
   });
 
   it('should go to login page', async () => {
@@ -74,4 +78,10 @@ describe('Check that the module is installed by default', async () => {
     const isModuleEnabled = await moduleManagerPage.isModuleEnabled(page, moduleInformation.name);
     await expect(isModuleEnabled).to.be.true;
   });
+/*
+  it('should check db', async function () {
+    const result = await dbHelper.getQueryResults(dbHelper.firstquery);
+
+    console.log(result);
+  })*/
 });
